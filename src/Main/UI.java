@@ -2,12 +2,16 @@ package Main;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class UI {
     GameManager gm;
@@ -19,7 +23,7 @@ public class UI {
     public UI(GameManager gm){
         this.gm = gm;
         CreateMainField();
-        createBackground();
+        generateScreen();
         window.setVisible(true);
     }
     public void CreateMainField(){
@@ -39,19 +43,66 @@ public class UI {
         messageText.setFont(new Font("Book Antiqua", Font.PLAIN,26));
         window.add(messageText);
     }
-    public void  createBackground(){
-        bgPanel[1] = new JPanel();
-        bgPanel[1].setBounds(50,50,700,350);
-        bgPanel[1].setBackground(Color.cyan);
-        bgPanel[1].setLayout(null);
+    public void  createBackground(int bgNum, String bgFileName){
+        bgPanel[bgNum] = new JPanel();
+        bgPanel[bgNum].setBounds(50,50,700,350);
+        bgPanel[bgNum].setBackground(Color.cyan);
+        bgPanel[bgNum].setLayout(null);
         window.add(bgPanel[1]);
 
-        bgLabel[1] = new JLabel();
-        bgLabel[1].setBounds(0,0,700,350);
+        bgLabel[bgNum] = new JLabel();
+        bgLabel[bgNum].setBounds(0,0,700,350);
         
-        ImageIcon bg = new ImageIcon("D:\\KMITL\\JAVA\\Game\\res\\bg700x350.jpg");
-        bgLabel[1].setIcon(bg);
+        ImageIcon bg = new ImageIcon(bgFileName);
+        bgLabel[bgNum].setIcon(bg);
         
-        bgPanel[1].add(bgLabel[1]);
+        
+    }
+    public void createObjct(int bgNum, int objx, int objy, int objwidth, int objheight, String objfileName, String choice1Name, String choice2Name, String choice3Name){
+        JPopupMenu popMenu = new JPopupMenu();
+
+        JMenuItem menuItem[] = new JMenuItem[4];
+        menuItem[1] = new JMenuItem(choice1Name);
+        popMenu.add(menuItem[1]);
+        menuItem[2] = new JMenuItem(choice2Name);
+        popMenu.add(menuItem[2]);
+        menuItem[3] = new JMenuItem(choice3Name);
+        popMenu.add(menuItem[3]);
+
+        JLabel objectLabel = new JLabel();
+        objectLabel.setBounds(objx,objy,objwidth,objheight);
+        
+        ImageIcon objIcon = new ImageIcon(objfileName);
+        objectLabel.setIcon(objIcon);
+
+        objectLabel.addMouseListener(new MouseListener() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+
+            }
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    popMenu.show(objectLabel, e.getX(), e.getY());
+                }
+            }
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+
+            }
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+
+            }
+            public void mouseExited(java.awt.event.MouseEvent e) {
+
+            }
+        });
+
+        bgPanel[bgNum].add(objectLabel);
+        bgPanel[bgNum].add(bgLabel[bgNum]);
+    }
+    public void generateScreen(){
+        createBackground(1,"D:\\KMITL\\JAVA\\Game\\res\\bg700x350.jpg");
+        createObjct(1,450,100,200,200,"D:\\KMITL\\JAVA\\Game\\res\\hut200x200.png","Look","Talk","Rest");
+        createObjct(1,70,140,150,150,"D:\\KMITL\\JAVA\\Game\\res\\player150x150.png","Look","Talk","Attack");
+        createObjct(1,300,230,100,67,"D:\\KMITL\\JAVA\\Game\\res\\chest100x67.png","Look","Talk","Open");
+
     }
 }
