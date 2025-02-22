@@ -49,5 +49,9 @@ public class UI {
         bgLabel[1] = new JLabel();
         bgLabel[1].setBounds(0,0,700,350);
         
+        ImageIcon bg = new ImageIcon("D:\\KMITL\\JAVA\\Game\\res\\bg700x350.jpg");
+        bgLabel[1].setIcon(bg);
+        
+        bgPanel[1].add(bgLabel[1]);
     }
 }
