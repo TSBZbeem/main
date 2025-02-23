@@ -58,15 +58,22 @@ public class UI {
         
         
     }
-    public void createObjct(int bgNum, int objx, int objy, int objwidth, int objheight, String objfileName, String choice1Name, String choice2Name, String choice3Name){
+    public void createObjct(int bgNum, int objx, int objy, int objwidth, int objheight, String objfileName, String choice1Name, String choice2Name, String choice3Name,
+                            String Choice1Command, String Choice2Command, String Choice3Command){
         JPopupMenu popMenu = new JPopupMenu();
 
         JMenuItem menuItem[] = new JMenuItem[4];
         menuItem[1] = new JMenuItem(choice1Name);
+        menuItem[1].addActionListener(gm.aHandler);
+        menuItem[1].setActionCommand(Choice1Command);
         popMenu.add(menuItem[1]);
         menuItem[2] = new JMenuItem(choice2Name);
+        menuItem[2].addActionListener(gm.aHandler);
+        menuItem[2].setActionCommand(Choice2Command);
         popMenu.add(menuItem[2]);
         menuItem[3] = new JMenuItem(choice3Name);
+        menuItem[3].addActionListener(gm.aHandler);
+        menuItem[3].setActionCommand(Choice3Command);
         popMenu.add(menuItem[3]);
 
         JLabel objectLabel = new JLabel();
@@ -100,9 +107,9 @@ public class UI {
     }
     public void generateScreen(){
         createBackground(1,"D:\\KMITL\\JAVA\\Game\\res\\bg700x350.jpg");
-        createObjct(1,450,100,200,200,"D:\\KMITL\\JAVA\\Game\\res\\hut200x200.png","Look","Talk","Rest");
-        createObjct(1,70,140,150,150,"D:\\KMITL\\JAVA\\Game\\res\\player150x150.png","Look","Talk","Attack");
-        createObjct(1,300,230,100,67,"D:\\KMITL\\JAVA\\Game\\res\\chest100x67.png","Look","Talk","Open");
+        createObjct(1,450,100,200,200,"D:\\KMITL\\JAVA\\Game\\res\\hut200x200.png","Look","Talk","Rest","lookHut","talkHut","restHut");
+        createObjct(1,70,140,150,150,"D:\\KMITL\\JAVA\\Game\\res\\player150x150.png","Look","Talk","Attack","lookPlayer","talkPlayer","attackPlayer");
+        createObjct(1,300,230,100,67,"D:\\KMITL\\JAVA\\Game\\res\\chest100x67.png","Look","Talk","Open","lookChest","talkChest","openChest");
 
     }
 }
