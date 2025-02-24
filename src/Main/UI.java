@@ -3,6 +3,7 @@ package Main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseListener;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ public class UI {
     }
     public void CreateMainField(){
         window = new JFrame();
-        window.setSize(800,600);
+        window.setSize(1344,768);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
@@ -106,10 +107,11 @@ public class UI {
         bgPanel[bgNum].add(bgLabel[bgNum]);
     }
     public void generateScreen(){
-        createBackground(1,"D:\\KMITL\\JAVA\\Game\\res\\bg700x350.jpg");
-        createObjct(1,450,100,200,200,"D:\\KMITL\\JAVA\\Game\\res\\hut200x200.png","Look","Talk","Rest","lookHut","talkHut","restHut");
-        createObjct(1,70,140,150,150,"D:\\KMITL\\JAVA\\Game\\res\\player150x150.png","Look","Talk","Attack","lookPlayer","talkPlayer","attackPlayer");
-        createObjct(1,300,230,100,67,"D:\\KMITL\\JAVA\\Game\\res\\chest100x67.png","Look","Talk","Open","lookChest","talkChest","openChest");
+        String path = Paths.get(".").toAbsolutePath().normalize().toString();
+        createBackground(1,path+"/res/bg700x350.jpg");
+        createObjct(1,450,100,200,200,path+"/res/hut200x200.png","Look","Talk","Rest","lookHut","talkHut","restHut");
+        createObjct(1,70,140,150,150,path+"/res/player150x150.png","Look","Talk","Attack","lookPlayer","talkPlayer","attackPlayer");
+        createObjct(1,300,230,100,67,path+"/res/chest100x67.png","Look","Talk","Open","lookChest","talkChest","openChest");
 
     }
 }
